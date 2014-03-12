@@ -12,7 +12,10 @@
         //engineDir: '../../cocos2d/',
         SingleEngineFile:'lib/Cocos2d-html5-v2.2.2.min.js',
         appFiles:[
-            'src/GameLayer.js'
+            'src/resource.js',
+            'src/GameLayer.js',
+            'src/bloodTube.js',
+            'src/UpButton.js'
         ]
     };
 
