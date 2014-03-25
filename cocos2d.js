@@ -15,7 +15,7 @@
             'src/resource.js',
             'src/GameLayer.js',
             'src/bloodTube.js',
-            'src/UpButton.js'
+            'src/ButtonControl.js'
         ]
     };
 
