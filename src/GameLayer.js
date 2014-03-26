@@ -13,6 +13,11 @@ var GameLayer = cc.LayerColor.extend({
 
 		this.countPress = 0;
 
+		this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
+        // this.scoreLabel.setColor( new cc.Color3B(255,255,255) );
+        this.addChild( this.scoreLabel );
+
 		this.bloodSchedule();
 		this.buttonSchedule();
 		this.setKeyboardEnabled(true);

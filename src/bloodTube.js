@@ -3,12 +3,12 @@ var bloodTube = cc.Node.extend({
         this._super();
         this.outer = cc.Sprite.create('res/images/outer-tube.png');
         this.outer.setAnchorPoint(new cc.Point(0,0));
-        this.outer.setPosition(new cc.Point(630,200));
+        this.outer.setPosition(new cc.Point(630,80));
         this.addChild(this.outer);
 
         this.inner = cc.Sprite.create('res/images/inner-tube.png');
         this.inner.setAnchorPoint(new cc.Point(0,0));
-        this.inner.setPosition(new cc.Point(638,208));
+        this.inner.setPosition(new cc.Point(638,88));
         this.addChild(this.inner);
 
         this.rate = 0;
