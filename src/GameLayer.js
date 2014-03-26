@@ -1,7 +1,10 @@
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
 
-		this.blood = new bloodTube();
+		this.waterTube = new WaterTube();
+		this.addChild(this.waterTube);
+
+		this.blood = new BloodTube();
 		this.addChild(this.blood);
 
 		this.but = new ButtonControl();

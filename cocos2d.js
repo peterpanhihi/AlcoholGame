@@ -14,8 +14,9 @@
         appFiles:[
             'src/resource.js',
             'src/GameLayer.js',
-            'src/bloodTube.js',
-            'src/ButtonControl.js'
+            'src/BloodTube.js',
+            'src/ButtonControl.js',
+            'src/WaterTube.js'
         ]
     };
 
