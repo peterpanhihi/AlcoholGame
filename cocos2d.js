@@ -16,7 +16,9 @@
             'src/GameLayer.js',
             'src/BloodTube.js',
             'src/ButtonControl.js',
-            'src/WaterTube.js'
+            'src/WaterTube.js',
+            'src/WaterBut.js',
+            'src/BonusBut.js'
         ]
     };
 

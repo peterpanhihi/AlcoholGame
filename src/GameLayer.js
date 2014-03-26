@@ -10,6 +10,12 @@ var GameLayer = cc.LayerColor.extend({
 		this.but = new ButtonControl();
 		this.addChild(this.but);
 
+		this.waterBut = new WaterBut();
+		this.addChild(this.waterBut);
+
+		this.bonus = new BonusBut();
+		this.addChild(this.bonus);
+
 		this.press = GameLayer.PRESS.UP;
 		this.direction = GameLayer.DIR.STILL;
 		this.correctDirection = GameLayer.DIR.STILL;

@@ -3,7 +3,7 @@ var ButtonControl = cc.Node.extend({
         this._super();
 
         this.button = cc.Sprite.create( 'res/images/Play_Button.png' );
-        this.button.setPosition(new cc.Point(450,120));
+        this.button.setPosition(new cc.Point(500,120));
         this.addChild(this.button);
 
         // this.downButton = cc.Sprite.create( 'res/images/Down_default.png' );
