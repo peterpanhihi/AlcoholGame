@@ -17,9 +17,11 @@ var GameLayer = cc.LayerColor.extend({
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         // this.scoreLabel.setColor( new cc.Color3B(255,255,255) );
         this.addChild( this.scoreLabel );
+        this.score = 0;
 
 		this.bloodSchedule();
 		this.buttonSchedule();
+		this.scheduleUpdate();
 		this.setKeyboardEnabled(true);
 	},
 	onKeyDown: function( e ) {
@@ -60,10 +62,12 @@ var GameLayer = cc.LayerColor.extend({
 				this.blood.decrease();
 				this.press = GameLayer.PRESS.DOWN;
 				this.countPress++;
+				this.score++;
 				return true;
 			}
 		}else{
 			this.blood.increase();
+			this.score--;
 		}
 		return false;
 	},
@@ -105,6 +109,9 @@ var GameLayer = cc.LayerColor.extend({
             	this.setCorrectDirection(GameLayer.DIR.RIGHT);
                 break;
 		}
+	},
+	update:function(dt){
+		this.scoreLabel.setString(this.score);
 	}
 });
 
