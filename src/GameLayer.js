@@ -9,7 +9,7 @@ var GameLayer = cc.LayerColor.extend({
 
 		this.press = GameLayer.PRESS.UP;
 		this.direction = GameLayer.DIR.STILL;
-		this.nextDirection = GameLayer.DIR.STILL;
+		this.correctDirection = GameLayer.DIR.STILL;
 
 		this.countPress = 0;
 
@@ -27,12 +27,21 @@ var GameLayer = cc.LayerColor.extend({
 				break;
 			case cc.KEY.down:
 				this.setDirection(GameLayer.DIR.DOWN);
+				if(this.checkDirection()){
+					this.but.setDownDefault();
+				}
 				break;
 			case cc.KEY.left:
 				this.setDirection(GameLayer.DIR.LEFT);
+				if(this.checkDirection()){
+					this.but.setLeftDefault();
+				}
 				break;
 			case cc.KEY.right:
 				this.setDirection(GameLayer.DIR.RIGHT);
+				if(this.checkDirection()){
+					this.but.setRightDefault();
+				}
 				break;
 			}
 	},
@@ -41,32 +50,34 @@ var GameLayer = cc.LayerColor.extend({
 			this.setDirection(GameLayer.DIR.STILL);
 	},
 	checkDirection: function(){
-		if(this.direction == this.nextDirection){
+		if(this.direction == this.correctDirection){
 			if(this.press == GameLayer.PRESS.UP && this.countPress == 0){
 				this.blood.decrease();
 				this.press = GameLayer.PRESS.DOWN;
 				this.countPress++;
 				return true;
 			}
+		}else{
+			this.blood.increase();
 		}
 		return false;
 	},
 	setDirection: function( dir ){
 		this.direction = dir;
 	},
-	setNextDirection: function( dir ){
-		this.nextDirection = dir;
+	setCorrectDirection: function( dir ){
+		this.correctDirection = dir;
 	},
 	bloodSchedule: function(){
 		this.schedule(function(){
 			this.blood.increase();
-		},1);
+		},1.5);
 	},
 	buttonSchedule: function(){
 		this.schedule(function(){
 			this.randomButton();
 			this.countPress = 0;
-		},1.5);
+		},1);
 	},
 	randomButton: function(){
 		// var ran = Math.floor(Math.random()*4)+1;
@@ -74,16 +85,19 @@ var GameLayer = cc.LayerColor.extend({
 		switch(ran){
 			case GameLayer.DIR.UP:
 				this.but.setUpImageBlink();
-				this.setNextDirection(GameLayer.DIR.UP);
+				this.setCorrectDirection(GameLayer.DIR.UP);
                 break;
             case GameLayer.DIR.DOWN:
-           		this.setNextDirection(GameLayer.DIR.DOWN);
+            	this.but.setDownImageBlink();
+           		this.setCorrectDirection(GameLayer.DIR.DOWN);
                 break;
             case GameLayer.DIR.LEFT:
-            	this.setNextDirection(GameLayer.DIR.LEFT);
+            	this.but.setLeftImageBlink();
+            	this.setCorrectDirection(GameLayer.DIR.LEFT);
                 break;
             case GameLayer.DIR.RIGHT:
-            	this.setNextDirection(GameLayer.DIR.RIGHT);
+           		this.but.setRightImageBlink();
+            	this.setCorrectDirection(GameLayer.DIR.RIGHT);
                 break;
 		}
 	}

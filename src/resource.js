@@ -9,7 +9,8 @@ var g_resources = [
     {src: 'res/images/Up_Button.png' },
     {src: 'res/images/Up_default.png' },
     {src: 'res/images/inner-tube.png' },
-    {src: 'res/images/outer-tube.png' }
+    {src: 'res/images/outer-tube.png' },
+    {src: 'res/images/Play_Button.png' }
     
  
     //plist
