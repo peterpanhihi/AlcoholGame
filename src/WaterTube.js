@@ -14,7 +14,6 @@ var WaterTube = cc.Node.extend({
         this.rate = 0;
         this.inner.setScaleY(this.rate);
     },
-
     increase: function(){
     	if(this.rate<1){
     		this.rate+=0.03;
@@ -26,6 +25,9 @@ var WaterTube = cc.Node.extend({
     		this.rate-=0.05;
     		this.inner.setScaleY(this.rate);
     	}
+    },
+    checkRate: function(){
+        return this.rate>=0.05;
     }
 
 });

@@ -61,6 +61,10 @@ var GameLayer = cc.LayerColor.extend({
 				}
 				break;
 			case cc.KEY.w:
+				if(this.waterTube.checkRate()){
+					this.waterTube.decrease();
+					this.blood.decrease();
+				}
 				break;
 			}
 	},
