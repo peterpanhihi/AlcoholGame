@@ -13,7 +13,8 @@ var g_resources = [
     {src: 'res/images/Play_Button.png' },
     {src: 'res/images/water-tube.png' },
     {src: 'res/images/water-outer-tube.png' },
-    {src: 'res/images/fried_chicken.png' }
+    {src: 'res/images/fried_chicken.png' },
+    {src: 'res/images/fried_chicken_default.png' }
  
     //plist
  

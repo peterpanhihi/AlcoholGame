@@ -31,6 +31,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.bloodSchedule();
 		this.buttonSchedule();
 		this.waterSchedule();
+		this.bonusSchedule();
 		this.scheduleUpdate();
 		this.setKeyboardEnabled(true);
 	},
@@ -64,6 +65,12 @@ var GameLayer = cc.LayerColor.extend({
 				if(this.waterTube.checkRate()){
 					this.waterTube.decrease();
 					this.blood.decrease();
+				}
+				break;
+			case cc.KEY.b:
+				if(this.bonus.isBonus()){
+					this.score += this.bonus.getBonus();
+					this.bonus.setDefault();
 				}
 				break;
 			}
@@ -102,6 +109,11 @@ var GameLayer = cc.LayerColor.extend({
 		this.schedule(function(){
 			this.waterTube.increase();
 		},2);
+	},
+	bonusSchedule: function(){
+		this.schedule(function(){
+			this.bonus.setBlink();
+		},3);
 	},
 	buttonSchedule: function(){
 		this.schedule(function(){
