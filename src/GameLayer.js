@@ -65,6 +65,8 @@ var GameLayer = cc.LayerColor.extend({
 				if(this.waterTube.checkRate()){
 					this.waterTube.decrease();
 					this.blood.decrease();
+				}else{
+					this.score -= 5;
 				}
 				break;
 			case cc.KEY.b:
