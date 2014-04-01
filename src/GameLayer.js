@@ -28,11 +28,14 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.scoreLabel );
         this.score = 0;
 
+        this.rate = 0;
+
 		this.bloodSchedule();
 		this.buttonSchedule();
 		this.waterSchedule();
 		this.bonusSchedule();
 		this.scheduleUpdate();
+		this.increaseRate();
 		this.setKeyboardEnabled(true);
 	},
 	onKeyDown: function( e ) {
@@ -105,7 +108,7 @@ var GameLayer = cc.LayerColor.extend({
 	bloodSchedule: function(){
 		this.schedule(function(){
 			this.blood.increase();
-		},1.5);
+		},1.5+this.rate);
 	},
 	waterSchedule: function(){
 		this.schedule(function(){
@@ -121,7 +124,7 @@ var GameLayer = cc.LayerColor.extend({
 		this.schedule(function(){
 			this.randomButton();
 			this.countPress = 0;
-		},1);
+		},1+this.rate);
 	},
 	randomButton: function(){
 		// var ran = Math.floor(Math.random()*4)+1;
@@ -147,6 +150,11 @@ var GameLayer = cc.LayerColor.extend({
 	},
 	update:function(dt){
 		this.scoreLabel.setString(this.score);
+	},
+	increaseRate: function(){
+		this.schedule(function(){
+			this.rate += 0.5;
+		},5);
 	}
 });
 
