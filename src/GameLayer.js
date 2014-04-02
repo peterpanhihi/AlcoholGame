@@ -153,8 +153,8 @@ var GameLayer = cc.LayerColor.extend({
 	},
 	increaseRate: function(){
 		this.schedule(function(){
-			this.rate += 0.5;
-		},5);
+			this.rate += 1;
+		},2);
 	}
 });
 
