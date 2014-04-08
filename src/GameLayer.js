@@ -1,3 +1,4 @@
+var delay = 0.6;
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
 
@@ -17,49 +18,42 @@ var GameLayer = cc.LayerColor.extend({
 		this.direction = GameLayer.DIR.STILL;
 		this.correctDirection = GameLayer.DIR.STILL;
 
-		this.countPress = 0;
-
 		this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
 		this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         // this.scoreLabel.setColor( new cc.Color3B(255,255,255) );
         this.addChild( this.scoreLabel );
+
         this.score = 0;
+        this.countPress = 0;
+        // this.speed = 1;
+        this.initSchedule();
+        this.setKeyboardEnabled(true);
+    },
 
-        this.rate = 0;
-
+    initSchedule : function(){
         this.bloodSchedule();
         this.buttonSchedule();
         this.waterSchedule();
         this.scheduleUpdate();
-        this.increaseRate();
-        this.setKeyboardEnabled(true);
     },
 
-    onKeyDown: function( e ) {
+    onKeyDown : function( e ) {
     	switch(e) {
     		case cc.KEY.up:
     		this.setDirection(GameLayer.DIR.UP);
-    		if(this.checkDirection()){
-    			this.but.setUpDefault();
-    		}
+    		this.checkDirection();
     		break;
     		case cc.KEY.down:
     		this.setDirection(GameLayer.DIR.DOWN);
-    		if(this.checkDirection()){
-    			this.but.setDownDefault();
-    		}
+    		this.checkDirection();
     		break;
     		case cc.KEY.left:
     		this.setDirection(GameLayer.DIR.LEFT);
-    		if(this.checkDirection()){
-    			this.but.setLeftDefault();
-    		}
+    		this.checkDirection();
     		break;
     		case cc.KEY.right:
     		this.setDirection(GameLayer.DIR.RIGHT);
-    		if(this.checkDirection()){
-    			this.but.setRightDefault();
-    		}
+    		this.checkDirection();
     		break;
     		case cc.KEY.w:
     		if(this.waterTube.checkRate()){
@@ -95,6 +89,7 @@ var GameLayer = cc.LayerColor.extend({
     			this.isPress = GameLayer.PRESS.DOWN;
     			this.countPress++;
     			this.score++;
+                this.but.setDefault();
     			return true;
     		}
     	}else{
@@ -116,24 +111,26 @@ var GameLayer = cc.LayerColor.extend({
     bloodSchedule: function(){
     	this.schedule(function(){
     		this.blood.increase();
-    	},1.5 + this.rate);
+    	},1.5 );
     },
 
     waterSchedule: function(){
     	this.schedule(function(){
     		this.waterTube.increase();
-    	},2);
+    	},2 );
     },
 
     buttonSchedule: function(){
     	this.schedule(function(){
     		this.randomButton();
-    		this.countPress = 0;
-    	},1 + this.rate);
+            this.countPress = 0;
+    	}, delay );
     },
 
     randomButton: function(){
 		// var ran = Math.floor(Math.random()*4)+1;
+        this.but.setDefault();
+
 		var ran = Math.floor(Math.random()*4)+1;
 		switch(ran){
 			case GameLayer.DIR.UP:
@@ -158,12 +155,6 @@ var GameLayer = cc.LayerColor.extend({
 	update:function(dt){
 		this.scoreLabel.setString(this.score);
 	},
-
-	increaseRate: function(){
-		this.schedule(function(){
-			this.rate += 1;
-		},2);
-	}
 });
 
 var StartScene = cc.Scene.extend({

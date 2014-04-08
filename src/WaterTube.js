@@ -3,7 +3,7 @@ var WaterTube = cc.Node.extend({
         this._super();
         this.outer = cc.Sprite.create( 'res/images/water-outer-tube.png' );
         this.outer.setAnchorPoint(new cc.Point(0,0));
-        this.outer.setPosition(new cc.Point(50,80));
+        this.outer.setPosition(new cc.Point(50,77));
         this.addChild(this.outer);
 
         this.inner = cc.Sprite.create( 'res/images/water-tube1.png' );
@@ -17,7 +17,6 @@ var WaterTube = cc.Node.extend({
     },
 
     increase: function(){
-        console.log(this.rate);
     	if( this.rate < 1 && this.state == WaterTube.DIR.BUTTOM ){
     		this.rate += 0.03;
     		this.inner.setScaleY(this.rate);
@@ -40,7 +39,7 @@ var WaterTube = cc.Node.extend({
     },
 
     resetRate: function(){
-        this.rate = 0.93;
+        this.rate = 0;
         this.inner.setScaleY(this.rate);
     },
 
