@@ -3,8 +3,9 @@ var BonusBut = cc.Sprite.extend({
 		this._super();
 		this.status = false;
 		this.bonus = cc.Sprite.create('res/images/fried_chicken_default.png');
-        this.bonus.setPosition(new cc.Point(350,120));
+        this.bonus.setPosition(new cc.Point(260,150));
         this.addChild(this.bonus);
+        this.correctPress = 0;
 	},
 	setBlink:function(){
 		this.bonus.initWithFile( 'res/images/fried_chicken.png' );
@@ -19,5 +20,15 @@ var BonusBut = cc.Sprite.extend({
 	},
 	isBonus: function(){
 		return this.status;
+	},
+	resetCorrectPress : function(){
+		this.correctPress = 0;
+	},
+	increaseCorrectPress : function(){
+		this.correctPress++;
+	},
+	getCorrectPress : function(){
+		return this.correctPress;
 	}
+
 });

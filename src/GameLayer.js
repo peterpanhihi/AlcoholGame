@@ -10,13 +10,10 @@ var GameLayer = cc.LayerColor.extend({
 		this.but = new ButtonControl();
 		this.addChild(this.but);
 
-		this.waterBut = new WaterBut();
-		this.addChild(this.waterBut);
-
 		this.bonus = new BonusBut();
 		this.addChild(this.bonus);
 
-		this.press = GameLayer.PRESS.UP; //this.isPress
+		this.isPress = GameLayer.PRESS.UP; //this.isPress
 		this.direction = GameLayer.DIR.STILL;
 		this.correctDirection = GameLayer.DIR.STILL;
 
@@ -33,7 +30,6 @@ var GameLayer = cc.LayerColor.extend({
         this.bloodSchedule();
         this.buttonSchedule();
         this.waterSchedule();
-        this.bonusSchedule();
         this.scheduleUpdate();
         this.increaseRate();
         this.setKeyboardEnabled(true);
@@ -83,20 +79,26 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     onKeyUp: function(){
-    	this.press = GameLayer.PRESS.UP;
+    	this.isPress = GameLayer.PRESS.UP;
     	this.setDirection(GameLayer.DIR.STILL);
     },
 
     checkDirection: function(){
     	if(this.direction == this.correctDirection){
-    		if(this.press == GameLayer.PRESS.UP && this.countPress == 0){
+    		if(this.isPress == GameLayer.PRESS.UP && this.countPress == 0){
+                if( this.bonus.getCorrectPress() == 5 ){
+                    this.bonus.setBlink();
+                    this.bonus.resetCorrectPress();
+                }
+                this.bonus.increaseCorrectPress();
     			this.blood.decrease();
-    			this.press = GameLayer.PRESS.DOWN;
+    			this.isPress = GameLayer.PRESS.DOWN;
     			this.countPress++;
     			this.score++;
     			return true;
     		}
     	}else{
+            this.bonus.resetCorrectPress();
     		this.blood.increase();
     		this.score--;
     	}
@@ -121,11 +123,6 @@ var GameLayer = cc.LayerColor.extend({
     	this.schedule(function(){
     		this.waterTube.increase();
     	},2);
-    },
-    bonusSchedule: function(){
-    	this.schedule(function(){
-    		this.bonus.setBlink();
-    	},3);
     },
 
     buttonSchedule: function(){
