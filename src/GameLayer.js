@@ -1,4 +1,3 @@
-var delay = 0.6;
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
 
@@ -25,6 +24,7 @@ var GameLayer = cc.LayerColor.extend({
 
         this.score = 0;
         this.countPress = 0;
+        this.delay = 1;
         // this.speed = 1;
         this.initSchedule();
         this.setKeyboardEnabled(true);
@@ -122,35 +122,12 @@ var GameLayer = cc.LayerColor.extend({
 
     buttonSchedule: function(){
     	this.schedule(function(){
-    		this.randomButton();
+            this.but.setDefault();
+    		this.but.randomButton();
+            this.setCorrectDirection(this.but.getCorrectDirection());
             this.countPress = 0;
-    	}, delay );
+    	}, this.delay );
     },
-
-    randomButton: function(){
-		// var ran = Math.floor(Math.random()*4)+1;
-        this.but.setDefault();
-
-		var ran = Math.floor(Math.random()*4)+1;
-		switch(ran){
-			case GameLayer.DIR.UP:
-			this.but.setUpImageBlink();
-			this.setCorrectDirection(GameLayer.DIR.UP);
-			break;
-			case GameLayer.DIR.DOWN:
-			this.but.setDownImageBlink();
-			this.setCorrectDirection(GameLayer.DIR.DOWN);
-			break;
-			case GameLayer.DIR.LEFT:
-			this.but.setLeftImageBlink();
-			this.setCorrectDirection(GameLayer.DIR.LEFT);
-			break;
-			case GameLayer.DIR.RIGHT:
-			this.but.setRightImageBlink();
-			this.setCorrectDirection(GameLayer.DIR.RIGHT);
-			break;
-		}
-	},
 
 	update:function(dt){
 		this.scoreLabel.setString(this.score);
