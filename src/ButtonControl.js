@@ -1,4 +1,4 @@
-var delay = 3;
+var delay = 2;
 var ButtonControl = cc.Node.extend({
     ctor: function() {
         this._super();
@@ -59,7 +59,7 @@ var ButtonControl = cc.Node.extend({
         }
     },
     setDelay: function(){
-        if( delay > 0.8 ){
+        if( delay > 0.4 ){
             delay -= 0.05;
         }
     },

@@ -24,15 +24,13 @@ var GameLayer = cc.LayerColor.extend({
 
         this.score = 0;
         this.countPress = 0;
-        this.delay = 1;
-        // this.speed = 1;
+        
         this.initSchedule();
         this.setKeyboardEnabled(true);
     },
 
     initSchedule : function(){
         this.bloodSchedule();
-        this.buttonSchedule();
         this.waterSchedule();
         this.scheduleUpdate();
     },
@@ -78,6 +76,8 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     checkDirection: function(){
+        this.setCorrectDirection(this.but.getCorrectDirection());
+
     	if(this.direction == this.correctDirection){
     		if(this.isPress == GameLayer.PRESS.UP && this.countPress == 0){
                 if( this.bonus.getCorrectPress() == 5 ){
@@ -106,6 +106,7 @@ var GameLayer = cc.LayerColor.extend({
 
     setCorrectDirection: function( dir ){
     	this.correctDirection = dir;
+        this.countPress = 0;
     },
 
     bloodSchedule: function(){
@@ -118,15 +119,6 @@ var GameLayer = cc.LayerColor.extend({
     	this.schedule(function(){
     		this.waterTube.increase();
     	},2 );
-    },
-
-    buttonSchedule: function(){
-    	this.schedule(function(){
-            this.but.setDefault();
-    		this.but.randomButton();
-            this.setCorrectDirection(this.but.getCorrectDirection());
-            this.countPress = 0;
-    	}, this.delay );
     },
 
 	update:function(dt){
