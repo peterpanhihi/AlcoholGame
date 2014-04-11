@@ -2,13 +2,13 @@ var WaterTube = cc.Node.extend({
     ctor: function() {
         this._super();
         this.outer = cc.Sprite.create( 'res/images/water-outer-tube.png' );
-        this.outer.setAnchorPoint(new cc.Point(0,0));
-        this.outer.setPosition(new cc.Point(50,77));
-        this.addChild(this.outer);
+        this.outer.setAnchorPoint( new cc.Point( 0 , 0 ) );
+        this.outer.setPosition( new cc.Point( 50 , 77 ) );
+        this.addChild( this.outer );
 
         this.inner = cc.Sprite.create( 'res/images/water-tube1.png' );
         this.setInnerPosition();
-        this.addChild(this.inner);
+        this.addChild( this.inner );
 
         this.state = WaterTube.DIR.BUTTOM;
         this.countInnerUponBottle = 0;
@@ -22,7 +22,8 @@ var WaterTube = cc.Node.extend({
     		this.inner.setScaleY(this.rate);
     	}else {
             this.state = WaterTube.DIR.TOP;
-            this.countInnerUponBottle++;
+            if(this.countInnerUponBottle<8)
+                this.countInnerUponBottle++;
             this.setImageInner(this.countInnerUponBottle);
         }
     },
@@ -43,8 +44,8 @@ var WaterTube = cc.Node.extend({
         this.inner.setScaleY(this.rate);
     },
 
-    setImageInner: function(count){
-        switch(count) {
+    setImageInner: function( count ){
+        switch( count ) {
             case 0:
                 this.setInnerButtom();
                 this.state = WaterTube.DIR.BUTTOM;
@@ -114,12 +115,12 @@ var WaterTube = cc.Node.extend({
     },
 
     setInnerPosition: function(){
-        this.inner.setAnchorPoint(new cc.Point(0,0));
-        this.inner.setPosition(new cc.Point(58,84));
+        this.inner.setAnchorPoint( new cc.Point( 0 , 0 ) );
+        this.inner.setPosition( new cc.Point( 58 , 84 ) );
     },
 
     checkRate: function(){
-        return this.rate>=0.05;
+        return this.rate >= 0.05;
     }
 });
 
