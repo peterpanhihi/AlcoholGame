@@ -9,45 +9,47 @@ var ButtonControl = cc.Node.extend({
     },
 
     initFrame: function(){
+        this.leftButton = cc.Sprite.create( 'res/images/Left_frame.png' );
+        this.leftButton.setPosition( new cc.Point( ButtonControl.XPOSITION.ONE , 120 ) );
+        this.addChild( this.leftButton );
 
         this.upButton = cc.Sprite.create( 'res/images/Up_frame.png' );
-        this.upButton.setPosition( new cc.Point( 500 , 120 ) );
+        this.upButton.setPosition( new cc.Point( ButtonControl.XPOSITION.TWO , 120 ) );
         this.addChild( this.upButton );
 
         this.downButton = cc.Sprite.create( 'res/images/Down_frame.png' );
-        this.downButton.setPosition( new cc.Point( 610 , 120 ) );
+        this.downButton.setPosition( new cc.Point( ButtonControl.XPOSITION.THREE , 120 ) );
         this.addChild( this.downButton );
 
         this.rightButton = cc.Sprite.create( 'res/images/Right_frame.png' );
-        this.rightButton.setPosition( new cc.Point( 720 , 120 ) );
+        this.rightButton.setPosition( new cc.Point( ButtonControl.XPOSITION.FOUR , 120 ) );
         this.addChild( this.rightButton );
-
-        this.leftButton = cc.Sprite.create( 'res/images/Left_frame.png' );
-        this.leftButton.setPosition( new cc.Point( 390 , 120 ) );
-        this.addChild( this.leftButton );
-
     },
 
     initMoving: function(){
+        this.leftMove = cc.Sprite.create( 'res/images/Left_default.png' );
+        this.leftMove.xpos = ButtonControl.XPOSITION.ONE;
+        this.leftMove.status = ButtonControl.TRANFER.STOP;
+        this.leftMove.setPosition( new cc.Point( this.leftMove.xpos , 700 ) );
+        this.addChild( this.leftMove );
+
         this.upMove = cc.Sprite.create( 'res/images/Up_default.png' );
-        this.upMove.setPosition( new cc.Point( 500 , 700 ) );
+        this.upMove.xpos = ButtonControl.XPOSITION.TWO;
         this.upMove.status = ButtonControl.TRANFER.MOVE;
+        this.upMove.setPosition( new cc.Point( this.upMove.xpos , 700 ) );
         this.addChild( this.upMove );
 
         this.downMove = cc.Sprite.create( 'res/images/Down_default.png' );
-        this.downMove.setPosition( new cc.Point( 610 , 700 ) );
+        this.downMove.xpos = ButtonControl.XPOSITION.THREE;
         this.downMove.status = ButtonControl.TRANFER.STOP;
+        this.downMove.setPosition( new cc.Point( this.downMove.xpos , 700 ) ); 
         this.addChild( this.downMove );
 
         this.rightMove = cc.Sprite.create( 'res/images/Right_default.png' );
-        this.rightMove.setPosition( new cc.Point( 720 , 700 ) );
+        this.rightMove.xpos = ButtonControl.XPOSITION.FOUR;
         this.rightMove.status = ButtonControl.TRANFER.STOP;
+        this.rightMove.setPosition( new cc.Point( this.rightMove.xpos , 700 ) );
         this.addChild( this.rightMove );
-
-        this.leftMove = cc.Sprite.create( 'res/images/Left_default.png' );
-        this.leftMove.setPosition( new cc.Point( 390 , 700 ) );
-        this.leftMove.status = ButtonControl.TRANFER.STOP;
-        this.addChild( this.leftMove );
 
         this.velocity = 1;
     },
@@ -130,13 +132,7 @@ var ButtonControl = cc.Node.extend({
     },
 
     restart:function( move ){
-        var xPos = 0;
-        if( move == this.upMove )xPos = 500;
-        else if( move == this.downMove ) xPos = 610;
-        else if( move == this.rightMove ) xPos = 720;
-        else if( move == this.leftMove ) xPos = 390;
-
-        move.setPosition( new cc.Point( xPos , 700 ) );
+        move.setPosition( new cc.Point( move.xpos , 700 ) );
         move.status = ButtonControl.TRANFER.STOP;
     },
 
@@ -214,10 +210,17 @@ ButtonControl.DIR = {
     LEFT: 1,
     RIGHT: 2,
     UP: 3,
-    DOWN: 4,
-    STILL:0
+    DOWN: 4
 };
+
 ButtonControl.TRANFER = {
     MOVE: 0,
     STOP: 1
+};
+
+ButtonControl.XPOSITION = {
+    ONE: 390,
+    TWO: 500,
+    THREE: 610,
+    FOUR: 720
 };
