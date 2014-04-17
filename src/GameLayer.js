@@ -22,6 +22,18 @@ var GameLayer = cc.LayerColor.extend({
         // this.scoreLabel.setColor( new cc.Color3B(255,255,255) );
         this.addChild( this.scoreLabel );
 
+        this.waterLabel = cc.LabelTTF.create( 'press W' , 'Arial' , 27 );
+        this.waterLabel.setPosition( new cc.Point( 100 , 50 ) );
+        this.addChild( this.waterLabel );
+
+        this.bonusLable = cc.LabelTTF.create( 'press S' , 'Arial' , 27 );
+        this.bonusLable.setPosition( new cc.Point( 250 , 50 ) );
+        this.addChild(this.bonusLable);
+
+        this.bloodLabel = cc.LabelTTF.create( 'Blood Alcohol concentration' , 'Arial' , 16 );
+        this.bloodLabel.setPosition( new cc.Point( 150 , 540 ) );
+        this.addChild( this.bloodLabel );
+
         this.score = 0;
         this.countPress = 0;
         
@@ -38,33 +50,37 @@ var GameLayer = cc.LayerColor.extend({
     onKeyDown: function( e ) {
     	switch( e ) {
     		case cc.KEY.up:
-    		this.setDirection( GameLayer.DIR.UP );
-    		break;
+                this.checkCloseTo("up");
+                this.but.setUpImageBlink();
+    		    break;
     		case cc.KEY.down:
-    		this.setDirection( GameLayer.DIR.DOWN );
-    		break;
+                this.checkCloseTo("down");
+                this.but.setDownImageBlink();
+    	       	break;
     		case cc.KEY.left:
-    		this.setDirection( GameLayer.DIR.LEFT );
-    		break;
+                this.checkCloseTo("left");
+                this.but.setLeftImageBlink();
+        		break;
     		case cc.KEY.right:
-    		this.setDirection( GameLayer.DIR.RIGHT );
-    		break;
+                this.checkCloseTo("right");
+                this.but.setRightImageBlink();
+           		break;
     		case cc.KEY.w:
-    		this.checkWaterTube();
-    		break;
+    	       	this.checkWaterTube();
+          		break;
     		case cc.KEY.s:
-    		this.checkBonus();
-    		break;
+    	       	this.checkBonus();
+           		break;
     	}
     },
 
     onKeyUp: function(){
+        this.but.setDefault();
     	this.isPress = GameLayer.PRESS.UP;
-    	this.setDirection( GameLayer.DIR.STILL );
     },
 
     checkWaterTube: function(){
-        if( this.waterTube.checkRate() ){
+        if( this.isPressButton() && this.waterTube.checkRate() ){
             this.waterTube.decrease();
             this.blood.decrease();
         } else {
@@ -79,30 +95,25 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
 
-    checkDirection: function(){
-        this.setCorrectDirection( this.but.getCorrectDirection() );
-
-    	if( this.direction == this.correctDirection ){
-    		this.checkPressDirectionButton();
-    	} else {
-            this.bonus.resetCorrectPress();
-    		this.blood.increase();
-    		this.score--;
-    	}
-    	return false;
-    },
-
-    checkPressDirectionButton: function(){
-        if( this.isPress == GameLayer.PRESS.UP && this.countPress == 0 ){
+    checkCloseTo: function( message ){
+        if( this.but.callCloseTo( message) ){
             this.isPressCorrect5Times();
             this.bonus.increaseCorrectPress();
             this.blood.decrease();
-            this.isPress = GameLayer.PRESS.DOWN;
-            this.countPress++;
             this.score++;
             this.but.setDefault();
+        }else{
+            this.blood.increase();
+            this.score--;
+        }
+    },
+
+    isPressButton: function(){
+        if( this.isPress == GameLayer.PRESS.UP ){
+            this.isPress = GameLayer.PRESS.DOWN;
             return true;
         }
+        return false;
     },
 
     isPressCorrect5Times: function(){
@@ -112,30 +123,21 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
 
-    setDirection: function( dir ){
-    	this.direction = dir;
-        this.checkDirection();
-    },
-
-    setCorrectDirection: function( dir ){
-    	this.correctDirection = dir;
-        this.countPress = 0;
-    },
-
     bloodSchedule: function(){
-    	this.schedule(function(){
+    	this.schedule( function(){
     		this.blood.increase();
-    	},1.5 );
+    	},1 );
     },
 
     waterSchedule: function(){
-    	this.schedule(function(){
+    	this.schedule( function(){
     		this.waterTube.increase();
     	},2 );
     },
 
 	update:function( dt ){
-		this.scoreLabel.setString(this.score);
+		this.scoreLabel.setString( this.score );
+        this.but.updateVelocity( this.blood.getRate() * 10 );
 	},
 });
 

@@ -27,6 +27,10 @@ var BloodTube = cc.Node.extend({
     		this.rate -= 0.05;
     		this.inner.setScaleX( this.rate );
     	}
+    },
+
+    getRate: function(){
+        return this.rate;
     }
 
 });

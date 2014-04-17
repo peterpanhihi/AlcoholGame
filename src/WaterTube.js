@@ -22,9 +22,9 @@ var WaterTube = cc.Node.extend({
     		this.inner.setScaleY(this.rate);
     	}else {
             this.state = WaterTube.DIR.TOP;
-            if(this.countInnerUponBottle<8)
+            if( this.countInnerUponBottle < 8 )
                 this.countInnerUponBottle++;
-            this.setImageInner(this.countInnerUponBottle);
+            this.setImageInner( this.countInnerUponBottle );
         }
     },
 
@@ -35,7 +35,7 @@ var WaterTube = cc.Node.extend({
     	}
         else {
             this.countInnerUponBottle--;
-            this.setImageInner(this.countInnerUponBottle);
+            this.setImageInner( this.countInnerUponBottle );
         }
     },
 
