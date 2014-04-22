@@ -10,19 +10,19 @@ var ButtonControl = cc.Node.extend({
 
     initFrame: function(){
         this.leftButton = cc.Sprite.create( 'res/images/Left_frame.png' );
-        this.leftButton.setPosition( new cc.Point( ButtonControl.XPOSITION.ONE , 120 ) );
+        this.leftButton.setPosition( new cc.Point( ButtonControl.XPOSITION.ONE , 300 ) );
         this.addChild( this.leftButton );
 
         this.upButton = cc.Sprite.create( 'res/images/Up_frame.png' );
-        this.upButton.setPosition( new cc.Point( ButtonControl.XPOSITION.TWO , 120 ) );
+        this.upButton.setPosition( new cc.Point( ButtonControl.XPOSITION.TWO , 300 ) );
         this.addChild( this.upButton );
 
         this.downButton = cc.Sprite.create( 'res/images/Down_frame.png' );
-        this.downButton.setPosition( new cc.Point( ButtonControl.XPOSITION.THREE , 120 ) );
+        this.downButton.setPosition( new cc.Point( ButtonControl.XPOSITION.THREE , 300 ) );
         this.addChild( this.downButton );
 
         this.rightButton = cc.Sprite.create( 'res/images/Right_frame.png' );
-        this.rightButton.setPosition( new cc.Point( ButtonControl.XPOSITION.FOUR , 120 ) );
+        this.rightButton.setPosition( new cc.Point( ButtonControl.XPOSITION.FOUR , 300 ) );
         this.addChild( this.rightButton );
     },
 

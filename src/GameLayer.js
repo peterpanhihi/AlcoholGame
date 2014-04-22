@@ -90,7 +90,7 @@ var GameLayer = cc.LayerColor.extend({
 
     checkBonus: function(){
         if( this.bonus.isBonus() ){
-            this.score += this.bonus.getBonus();
+            this.score += this.bonus.getBonusScore();
             this.bonus.setDefault();
         }
     },
@@ -117,7 +117,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     isPressCorrect20Times: function(){
-        if( this.bonus.getCorrectPress() == 20 ){
+        if( this.bonus.getCorrectPress() >= 20 ){
             this.bonus.setBlink();
             this.bonus.resetCorrectPress();
         }
