@@ -27,29 +27,39 @@ var ButtonControl = cc.Node.extend({
     },
 
     initMoving: function(){
+        this.movBut = new Array();
+
         this.leftMove = cc.Sprite.create( 'res/images/Left_default.png' );
         this.leftMove.xpos = ButtonControl.XPOSITION.ONE;
         this.leftMove.status = ButtonControl.TRANFER.STOP;
+        this.leftMove.startFrom = ButtonControl.LEAVE.TOP;
         this.leftMove.setPosition( new cc.Point( this.leftMove.xpos , 700 ) );
         this.addChild( this.leftMove );
+        this.movBut[0] = this.leftMove;
 
         this.upMove = cc.Sprite.create( 'res/images/Up_default.png' );
         this.upMove.xpos = ButtonControl.XPOSITION.TWO;
-        this.upMove.status = ButtonControl.TRANFER.MOVE;
+        this.upMove.status = ButtonControl.TRANFER.STOP;
+        this.upMove.startFrom = ButtonControl.LEAVE.TOP;
         this.upMove.setPosition( new cc.Point( this.upMove.xpos , 700 ) );
         this.addChild( this.upMove );
+        this.movBut[1] = this.upMove;
 
         this.downMove = cc.Sprite.create( 'res/images/Down_default.png' );
         this.downMove.xpos = ButtonControl.XPOSITION.THREE;
         this.downMove.status = ButtonControl.TRANFER.STOP;
+        this.downMove.startFrom = ButtonControl.LEAVE.TOP;
         this.downMove.setPosition( new cc.Point( this.downMove.xpos , 700 ) ); 
         this.addChild( this.downMove );
+        this.movBut[2] = this.downMove;
 
         this.rightMove = cc.Sprite.create( 'res/images/Right_default.png' );
         this.rightMove.xpos = ButtonControl.XPOSITION.FOUR;
         this.rightMove.status = ButtonControl.TRANFER.STOP;
+        this.rightMove.startFrom = ButtonControl.LEAVE.TOP;
         this.rightMove.setPosition( new cc.Point( this.rightMove.xpos , 700 ) );
         this.addChild( this.rightMove );
+        this.movBut[3] = this.rightMove;
 
         this.velocity = 1;
     },
@@ -70,38 +80,30 @@ var ButtonControl = cc.Node.extend({
     },
 
     randomButton: function(){
-        var ran = Math.floor( Math.random() * 4 ) + 1;
-        switch(ran){
-            case ButtonControl.DIR.UP:
-            this.upMove.status = ButtonControl.TRANFER.MOVE;
-            break;
-            case ButtonControl.DIR.DOWN:
-            this.downMove.status = ButtonControl.TRANFER.MOVE;
-            break;
-            case ButtonControl.DIR.LEFT:
-            this.leftMove.status = ButtonControl.TRANFER.MOVE;
-            break;
-            case ButtonControl.DIR.RIGHT:
-            this.rightMove.status = ButtonControl.TRANFER.MOVE;
-            break;
-        }
+        var ran = Math.floor( Math.random() * 3 );
+        // var leave = Math.floor(Math.random() * 2 ) + 1;
+        var leave = 1;
+
+        this.movBut[ran].status = ButtonControl.TRANFER.MOVE;
+        this.movBut[ran].startFrom = leave;
     },
 
     checkMovingButton: function(){
-        if( this.upMove.status == ButtonControl.TRANFER.MOVE ){
-            this.moveUpButton();
-        }
-
-        if( this.downMove.status == ButtonControl.TRANFER.MOVE ){
-            this.moveDownButton();
-        }
-
-        if( this.rightMove.status == ButtonControl.TRANFER.MOVE ){
-            this.moveRightButton();
-        }
-
-        if( this.leftMove.status == ButtonControl.TRANFER.MOVE ){
-            this.moveLeftButton();
+        for( var i in this.movBut ){
+            if( this.movBut[i].status == ButtonControl.TRANFER.MOVE ){
+                this.pos = this.movBut[i].getPosition();
+                if( this.pos.y <= 0 ){
+                    this.restart( this.movBut[i] );
+                }
+                else{
+                    if( this.movBut[i].startFrom == ButtonControl.LEAVE.TOP ){
+                        this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
+                    }
+                    else if( this.movBut[i].startFrom == ButtonControl.LEAVE.BUTTOM ){
+                        this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y + this.velocity ) );
+                    }
+                }
+            }
         }
     },
 
@@ -134,42 +136,6 @@ var ButtonControl = cc.Node.extend({
     restart:function( move ){
         move.setPosition( new cc.Point( move.xpos , 700 ) );
         move.status = ButtonControl.TRANFER.STOP;
-    },
-
-    moveUpButton: function(){
-        this.pos = this.upMove.getPosition();
-        if( this.pos.y <= 0 ){
-            this.restart( this.upMove );
-        }
-        else
-            this.upMove.setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
-    },
-
-    moveDownButton: function(){
-        this.pos = this.downMove.getPosition();
-        if( this.pos.y <= 0 ){
-            this.restart( this.downMove );
-        }
-        else
-            this.downMove.setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
-    },
-
-    moveRightButton: function(){
-        this.pos = this.rightMove.getPosition();
-        if( this.pos.y <= 0 ){
-            this.restart( this.rightMove );
-        }
-        else
-            this.rightMove.setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
-    },
-
-    moveLeftButton: function(){
-        this.pos = this.leftMove.getPosition();
-        if( this.pos.y <= 0 ){
-            this.restart( this.leftMove );
-        }
-        else
-            this.leftMove.setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
     },
 
     setUpImageBlink: function(){
@@ -206,13 +172,6 @@ var ButtonControl = cc.Node.extend({
 
 });
 
-ButtonControl.DIR = {
-    LEFT: 1,
-    RIGHT: 2,
-    UP: 3,
-    DOWN: 4
-};
-
 ButtonControl.TRANFER = {
     MOVE: 0,
     STOP: 1
@@ -223,4 +182,9 @@ ButtonControl.XPOSITION = {
     TWO: 500,
     THREE: 610,
     FOUR: 720
+};
+
+ButtonControl.LEAVE = {
+    TOP: 1,
+    BUTTOM: 2
 };
