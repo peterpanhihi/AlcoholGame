@@ -18,10 +18,6 @@ var BonusBut = cc.Sprite.extend({
 		this.status = false;
 	},
 
-	getBonus: function(){
-		return 5;
-	},
-
 	isBonus: function(){
 		return this.status;
 	},

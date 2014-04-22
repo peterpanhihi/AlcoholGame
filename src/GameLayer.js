@@ -97,7 +97,7 @@ var GameLayer = cc.LayerColor.extend({
 
     checkCloseTo: function( message ){
         if( this.but.callCloseTo( message) ){
-            this.isPressCorrect5Times();
+            this.isPressCorrect20Times();
             this.bonus.increaseCorrectPress();
             this.blood.decrease();
             this.score++;
@@ -116,8 +116,8 @@ var GameLayer = cc.LayerColor.extend({
         return false;
     },
 
-    isPressCorrect5Times: function(){
-        if( this.bonus.getCorrectPress() == 5 ){
+    isPressCorrect20Times: function(){
+        if( this.bonus.getCorrectPress() == 20 ){
             this.bonus.setBlink();
             this.bonus.resetCorrectPress();
         }
