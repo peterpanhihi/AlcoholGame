@@ -65,7 +65,7 @@ var ButtonControl = cc.Node.extend({
     },
 
      buttonSchedule: function(){
-        var random = Math.floor( Math.random() * 4 ) + 1;
+        var random = Math.floor( Math.random() * 4 );
         for( var i = 0; i < random; i++ ){
             this.randomButton();
         }
@@ -80,28 +80,25 @@ var ButtonControl = cc.Node.extend({
     },
 
     randomButton: function(){
-        var ran = Math.floor( Math.random() * 3 );
-        // var leave = Math.floor(Math.random() * 2 ) + 1;
-        var leave = 1;
-
+        var ran = Math.floor( Math.random() * 4 );
         this.movBut[ran].status = ButtonControl.TRANFER.MOVE;
-        this.movBut[ran].startFrom = leave;
     },
 
     checkMovingButton: function(){
         for( var i in this.movBut ){
             if( this.movBut[i].status == ButtonControl.TRANFER.MOVE ){
                 this.pos = this.movBut[i].getPosition();
-                if( this.pos.y <= 0 ){
-                    this.restart( this.movBut[i] );
+                if( this.movBut[i].startFrom == ButtonControl.LEAVE.TOP ){
+                    if( this.pos.y <= 300 ){
+                        this.restart( this.movBut[i] );
+                    }
+                    this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
                 }
-                else{
-                    if( this.movBut[i].startFrom == ButtonControl.LEAVE.TOP ){
-                        this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
+                else if( this.movBut[i].startFrom == ButtonControl.LEAVE.BUTTOM ){
+                    if( this.pos.y >= 300 ){
+                        this.restart( this.movBut[i] );
                     }
-                    else if( this.movBut[i].startFrom == ButtonControl.LEAVE.BUTTOM ){
-                        this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y + this.velocity ) );
-                    }
+                    this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y + this.velocity ) );
                 }
             }
         }
@@ -129,13 +126,21 @@ var ButtonControl = cc.Node.extend({
         var m = move.getPosition();
         if ( ( Math.abs(f.y - m.y ) <= 80 ) ){
             this.restart( move );
+            move.status = ButtonControl.TRANFER.STOP;
             return true;
         }
     },
 
     restart:function( move ){
-        move.setPosition( new cc.Point( move.xpos , 700 ) );
-        move.status = ButtonControl.TRANFER.STOP;
+        var leave = Math.floor( Math.random() * 2 ) + 1;
+        if( leave == 1 ){
+            move.startFrom = ButtonControl.LEAVE.TOP;
+            move.setPosition( new cc.Point( move.xpos , 700 ) );
+        }
+        else if( leave == 2 ){
+            move.startFrom = ButtonControl.LEAVE.BUTTOM;
+            move.setPosition( new cc.Point( move.xpos , -100 ) );
+        }
     },
 
     setUpImageBlink: function(){
