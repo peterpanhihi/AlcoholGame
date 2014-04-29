@@ -1,6 +1,10 @@
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
 
+        var bg = cc.Sprite.create( "res/images/bg.jpg" );
+        bg.setPosition(new cc.Point(400,400) );
+        this.addChild(bg);
+
 		this.waterTube = new WaterTube();
 		this.addChild( this.waterTube );
 
