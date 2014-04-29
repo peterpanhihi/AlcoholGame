@@ -26,7 +26,7 @@ var g_resources = [
     {src: 'res/images/water-tube9.png' },
     {src: 'res/images/water-outer-tube.png' },
     {src: 'res/images/fried_chicken.png' },
-    {src: 'res/images/fried_chicken_default.png' }
+    {src: 'res/images/fried_chicken_default.png' },
  
     //plist
  
@@ -37,4 +37,7 @@ var g_resources = [
     //bgm
  
     //effect
+    {src: 'effects/human_swallow_gulp.mp3'},
+    {src: 'effects/water_pour.mp3'},
+    {src: 'effects/crunch-2.mp3'}
 ];

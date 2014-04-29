@@ -83,6 +83,7 @@ var GameLayer = cc.LayerColor.extend({
         if( this.isPressButton() && this.waterTube.checkRate() ){
             this.waterTube.decrease();
             this.blood.decrease();
+            cc.AudioEngine.getInstance().playEffect( 'effects/water_pour.mp3' );
         } else {
             this.score -= 5;
         }
@@ -92,6 +93,7 @@ var GameLayer = cc.LayerColor.extend({
         if( this.bonus.isBonus() ){
             this.score += this.bonus.getBonusScore();
             this.bonus.setDefault();
+            cc.AudioEngine.getInstance().playEffect( 'effects/crunch-2.mp3' );
         }
     },
 
@@ -107,6 +109,7 @@ var GameLayer = cc.LayerColor.extend({
             this.score--;
             this.bonus.resetCorrectPress();
         }
+        cc.AudioEngine.getInstance().playEffect( 'effects/human_swallow_gulp.mp3' );
     },
 
     isPressButton: function(){
