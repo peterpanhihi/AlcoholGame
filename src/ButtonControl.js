@@ -61,7 +61,7 @@ var ButtonControl = cc.Node.extend({
         this.addChild( this.rightMove );
         this.movBut[3] = this.rightMove;
 
-        this.velocity = 1;
+        this.velocity = 2;
     },
 
      buttonSchedule: function(){
@@ -127,6 +127,7 @@ var ButtonControl = cc.Node.extend({
         if ( ( Math.abs(f.y - m.y ) <= 80 ) ){
             this.restart( move );
             move.status = ButtonControl.TRANFER.STOP;
+            cc.AudioEngine.getInstance().playEffect( 'effects/human_swallow_gulp.mp3' );
             return true;
         }
     },

@@ -1,3 +1,4 @@
+score = 0;
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
 
@@ -38,7 +39,6 @@ var GameLayer = cc.LayerColor.extend({
         this.bloodLabel.setPosition( new cc.Point( 150 , 540 ) );
         this.addChild( this.bloodLabel );
 
-        this.score = 0;
         this.countPress = 0;
         
         this.initSchedule();
@@ -89,15 +89,21 @@ var GameLayer = cc.LayerColor.extend({
             this.blood.decrease();
             cc.AudioEngine.getInstance().playEffect( 'effects/water_pour.mp3' );
         } else {
-            this.score -= 5;
+            score -= 5;
         }
     },
 
     checkBonus: function(){
         if( this.bonus.isBonus() ){
-            this.score += this.bonus.getBonusScore();
+            score += this.bonus.getBonusScore();
             this.bonus.setDefault();
             cc.AudioEngine.getInstance().playEffect( 'effects/crunch-2.mp3' );
+        }
+    },
+
+    checkEndGame: function(){
+        if( this.blood.getRate() >= 1 || score < 0 ){
+            this.endGame();
         }
     },
 
@@ -106,14 +112,13 @@ var GameLayer = cc.LayerColor.extend({
             this.bonus.increaseCorrectPress();
             this.isPressCorrect20Times();
             this.blood.decrease();
-            this.score++;
+            score++;
             this.but.setDefault();
         }else{
             this.blood.increase();
-            this.score--;
+            score--;
             this.bonus.resetCorrectPress();
         }
-        cc.AudioEngine.getInstance().playEffect( 'effects/human_swallow_gulp.mp3' );
     },
 
     isPressButton: function(){
@@ -143,10 +148,18 @@ var GameLayer = cc.LayerColor.extend({
     	},2 );
     },
 
-	update:function( dt ){
-		this.scoreLabel.setString( this.score );
+	update: function( dt ){
+		this.scoreLabel.setString( score );
         this.but.updateVelocity( this.blood.getRate() * 10 );
+        this.checkEndGame();
 	},
+
+    endGame: function(){
+        setTimeout(function(){
+            if(confirm("GAME OVER !! \nYour score : " + score + "\n Try again")){
+            location.reload();
+        }},1000);
+    }
 });
 
 var StartScene = cc.Scene.extend({
