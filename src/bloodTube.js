@@ -12,12 +12,13 @@ var BloodTube = cc.Node.extend({
         this.addChild( this.inner );
 
         this.rate = 0;
+        this.rateValue = 0.05;
         this.inner.setScaleX( this.rate );
     },
 
     increase: function(){
     	if( this.rate < 1 ){
-    		this.rate += 0.05;
+    		this.rate += this.rateValue;
     		this.inner.setScaleX( this.rate );
     	}
     },

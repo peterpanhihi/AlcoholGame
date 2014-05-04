@@ -62,6 +62,7 @@ var ButtonControl = cc.Node.extend({
         this.movBut[3] = this.rightMove;
 
         this.velocity = 2;
+        this.velocitySchedule();
     },
 
      buttonSchedule: function(){
@@ -174,6 +175,13 @@ var ButtonControl = cc.Node.extend({
 
     update: function( dt ){
         this.checkMovingButton();
+    },
+
+    velocitySchedule: function(){
+        this.schedule( function(){
+            this.velocity += 2;
+            console.log(this.velocity);
+        },5 );
     }
 
 });

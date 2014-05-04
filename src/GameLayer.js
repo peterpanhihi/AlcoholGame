@@ -43,7 +43,7 @@ var GameLayer = cc.LayerColor.extend({
         
         this.initSchedule();
         this.setKeyboardEnabled( true );
-        this.playMusic();
+        // this.playMusic();
     },
 
     initSchedule : function(){
@@ -103,7 +103,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     checkEndGame: function(){
-        if( this.blood.getRate() >= 1 || score < 0 ){
+        if( this.blood.getRate() > 1 || score < 0 ){
             this.endGame();
         }
     },
