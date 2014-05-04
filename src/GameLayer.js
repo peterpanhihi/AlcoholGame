@@ -43,6 +43,7 @@ var GameLayer = cc.LayerColor.extend({
         
         this.initSchedule();
         this.setKeyboardEnabled( true );
+        this.playMusic();
     },
 
     initSchedule : function(){
@@ -159,6 +160,10 @@ var GameLayer = cc.LayerColor.extend({
             if(confirm("GAME OVER !! \nYour score : " + score + "\n Try again")){
             location.reload();
         }},1000);
+    },
+
+    playMusic: function(){
+        cc.AudioEngine.getInstance().playMusic( 'effects/New Electro & House 2013 Dance Mix 71.mp3' );
     }
 });
 

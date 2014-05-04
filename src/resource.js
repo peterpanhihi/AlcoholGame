@@ -14,7 +14,6 @@ var g_resources = [
     {src: 'res/images/Up_frame.png' },
     {src: 'res/images/inner-tube.png' },
     {src: 'res/images/outer-tube.png' },
-    {src: 'res/images/Play_Button.png' },
     {src: 'res/images/water-tube1.png' },
     {src: 'res/images/water-tube2.png' },
     {src: 'res/images/water-tube3.png' },
@@ -27,6 +26,7 @@ var g_resources = [
     {src: 'res/images/water-outer-tube.png' },
     {src: 'res/images/fried_chicken.png' },
     {src: 'res/images/fried_chicken_default.png' },
+    {src: 'res/images/bg.jpg'},
  
     //plist
  
@@ -39,5 +39,6 @@ var g_resources = [
     //effect
     {src: 'effects/human_swallow_gulp.mp3'},
     {src: 'effects/water_pour.mp3'},
-    {src: 'effects/crunch-2.mp3'}
+    {src: 'effects/crunch-2.mp3'},
+    {src: 'effects/New Electro & House 2013 Dance Mix 71.mp3'}
 ];
