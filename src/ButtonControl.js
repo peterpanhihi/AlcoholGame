@@ -180,7 +180,6 @@ var ButtonControl = cc.Node.extend({
     velocitySchedule: function(){
         this.schedule( function(){
             this.velocity += 2;
-            console.log(this.velocity);
         },5 );
     }
 

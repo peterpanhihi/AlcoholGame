@@ -1,6 +1,7 @@
 score = 0;
 var GameLayer = cc.LayerColor.extend({
 	init: function(){
+        this.playMusic();
 
         var bg = cc.Sprite.create( "res/images/bg.jpg" );
         bg.setPosition(new cc.Point(400,400) );
@@ -43,7 +44,6 @@ var GameLayer = cc.LayerColor.extend({
         
         this.initSchedule();
         this.setKeyboardEnabled( true );
-        // this.playMusic();
     },
 
     initSchedule : function(){
@@ -163,7 +163,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     playMusic: function(){
-        cc.AudioEngine.getInstance().playMusic( 'effects/New Electro & House 2013 Dance Mix 71.mp3' );
+       cc.AudioEngine.getInstance().playMusic( 'effects/summerPartyMix.mp3', true );
     }
 });
 

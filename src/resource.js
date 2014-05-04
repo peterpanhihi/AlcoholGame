@@ -40,5 +40,5 @@ var g_resources = [
     {src: 'effects/human_swallow_gulp.mp3'},
     {src: 'effects/water_pour.mp3'},
     {src: 'effects/crunch-2.mp3'},
-    // {src: 'effects/New Electro & House 2013 Dance Mix 71.mp3'}
+    {src: 'effects/summerPartyMix.mp3'},
 ];
