@@ -27,6 +27,9 @@ var g_resources = [
     {src: 'res/images/fried_chicken.png' },
     {src: 'res/images/fried_chicken_default.png' },
     {src: 'res/images/bg.jpg'},
+    {src: 'res/images/bgAlcohol.jpg'},
+    {src: 'res/images/drunk.png'},
+    {src: 'res/images/undrunk.png'},
  
     //plist
  
@@ -41,4 +44,5 @@ var g_resources = [
     {src: 'effects/water_pour.mp3'},
     {src: 'effects/crunch-2.mp3'},
     {src: 'effects/summerPartyMix.mp3'},
+    {src: 'effects/Are_You_Ready.mp3'}
 ];

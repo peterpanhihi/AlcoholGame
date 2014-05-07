@@ -17,7 +17,8 @@
             'src/BloodTube.js',
             'src/ButtonControl.js',
             'src/WaterTube.js',
-            'src/BonusBut.js'
+            'src/BonusBut.js',
+            'src/Loader.js'
         ]
     };
 

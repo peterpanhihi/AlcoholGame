@@ -61,7 +61,7 @@ var ButtonControl = cc.Node.extend({
         this.addChild( this.rightMove );
         this.movBut[3] = this.rightMove;
 
-        this.velocity = 2;
+        this.velocity = 1;
         this.velocitySchedule();
     },
 
@@ -90,13 +90,13 @@ var ButtonControl = cc.Node.extend({
             if( this.movBut[i].status == ButtonControl.TRANFER.MOVE ){
                 this.pos = this.movBut[i].getPosition();
                 if( this.movBut[i].startFrom == ButtonControl.LEAVE.TOP ){
-                    if( this.pos.y <= 300 ){
+                    if( this.pos.y <= 290 ){
                         this.restart( this.movBut[i] );
                     }
                     this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y - this.velocity ) );
                 }
                 else if( this.movBut[i].startFrom == ButtonControl.LEAVE.BUTTOM ){
-                    if( this.pos.y >= 300 ){
+                    if( this.pos.y >= 310 ){
                         this.restart( this.movBut[i] );
                     }
                     this.movBut[i].setPosition( new cc.Point( this.pos.x , this.pos.y + this.velocity ) );
@@ -125,7 +125,7 @@ var ButtonControl = cc.Node.extend({
     closeTo: function( frame , move ){
         var f = frame.getPosition();
         var m = move.getPosition();
-        if ( ( Math.abs(f.y - m.y ) <= 80 ) ){
+        if ( ( Math.abs(f.y - m.y ) <= 100 ) ){
             this.restart( move );
             move.status = ButtonControl.TRANFER.STOP;
             cc.AudioEngine.getInstance().playEffect( 'effects/human_swallow_gulp.mp3' );
@@ -170,7 +170,10 @@ var ButtonControl = cc.Node.extend({
 
     updateVelocity: function( ve ){
         if( ve < 1 ) this.velocity = 1;
-        else this.velocity = ve;
+        else{
+            if(ve < this.velocity) this.velocity -= ve * 0.9;
+            else this.velocity = ve + 5 ;
+        } 
     },
 
     update: function( dt ){
@@ -179,8 +182,8 @@ var ButtonControl = cc.Node.extend({
 
     velocitySchedule: function(){
         this.schedule( function(){
-            this.velocity += 2;
-        },5 );
+            this.velocity += 5;
+        },3 );
     }
 
 });

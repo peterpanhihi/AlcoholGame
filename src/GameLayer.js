@@ -7,6 +7,14 @@ var GameLayer = cc.LayerColor.extend({
         bg.setPosition(new cc.Point(400,400) );
         this.addChild(bg);
 
+        var udCartoon = cc.Sprite.create( "res/images/undrunk.png");
+        udCartoon.setPosition( new cc.Point( 30 , 530 ));
+        this.addChild(udCartoon);
+
+        var dCartoon = cc.Sprite.create( "res/images/drunk.png" );
+        dCartoon.setPosition( new cc.Point( 630 , 530 ));
+        this.addChild(dCartoon);
+
 		this.waterTube = new WaterTube();
 		this.addChild( this.waterTube );
 
@@ -37,7 +45,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.bonusLable);
 
         this.bloodLabel = cc.LabelTTF.create( 'Blood Alcohol concentration' , 'Arial' , 16 );
-        this.bloodLabel.setPosition( new cc.Point( 150 , 540 ) );
+        this.bloodLabel.setPosition( new cc.Point( 170 , 550 ) );
         this.addChild( this.bloodLabel );
 
         this.countPress = 0;
@@ -98,12 +106,13 @@ var GameLayer = cc.LayerColor.extend({
         if( this.bonus.isBonus() ){
             score += this.bonus.getBonusScore();
             this.bonus.setDefault();
+            this.blood.decrease();
             cc.AudioEngine.getInstance().playEffect( 'effects/crunch-2.mp3' );
         }
     },
 
     checkEndGame: function(){
-        if( this.blood.getRate() > 1 || score < 0 ){
+        if( this.blood.getRate() >= 1 || score < 0 ){
             this.endGame();
         }
     },
@@ -151,7 +160,7 @@ var GameLayer = cc.LayerColor.extend({
 
 	update: function( dt ){
 		this.scoreLabel.setString( score );
-        this.but.updateVelocity( this.blood.getRate() * 10 );
+        this.but.updateVelocity( this.blood.getRate() * 7 );
         this.checkEndGame();
 	},
 
