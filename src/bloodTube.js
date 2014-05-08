@@ -25,10 +25,12 @@ var BloodTube = cc.Node.extend({
     },
 
     decrease: function(){
-    	if( this.rate >= 0.05 ){
-    		this.rate -= 0.05;
-    		this.inner.setScaleX( this.rate );
-    	}
+    	if( this.rate >= 0.1 ){
+    		this.rate -= 0.1;
+    	}else{
+            this.rate = 0;
+        }
+        this.inner.setScaleX( this.rate );
     },
 
     getRate: function(){
@@ -38,7 +40,7 @@ var BloodTube = cc.Node.extend({
     rateValueSchedule: function(){
         this.schedule(function(){
             this.rateValue += 0.005;
-        },10);
+        },15);
     }
 
 });

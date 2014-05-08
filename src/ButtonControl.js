@@ -61,6 +61,13 @@ var ButtonControl = cc.Node.extend({
         this.addChild( this.rightMove );
         this.movBut[3] = this.rightMove;
 
+        this.cross = cc.Sprite.create( 'res/images/cross.png' );
+        this.cross.status = ButtonControl.TRANFER.STOP;
+        this.cross.startFrom = ButtonControl.LEAVE.TOP;
+        this.cross.setPosition( new cc.Point( ButtonControl.XPOSITION.ONE , 700 ) );
+        this.addChild( this.cross );
+        this.movBut[4] = this.cross;
+
         this.velocity = 1;
         this.velocitySchedule();
     },
@@ -76,13 +83,28 @@ var ButtonControl = cc.Node.extend({
         }, delay );
     },
 
+    crossRandom: function(){
+         var ranPos = Math.floor( Math.random() * 4 );
+         if( this.movBut[ranPos].status != ButtonControl.TRANFER.MOVE ){
+            this.cross.xpos = this.movBut[ranPos].xpos;
+            this.restart( this.cross );
+            this.cross.status = ButtonControl.TRANFER.MOVE;
+         }
+    },
+
     setDelay: function(){
         if( delay >= 0.4 ) delay -= 0.05;
     },
 
     randomButton: function(){
-        var ran = Math.floor( Math.random() * 4 );
+        var ran = Math.floor( Math.random() * 5 );
+        if( ran == 4 ){
+            this.crossRandom();
+            delay+=0.1;
+            return;
+        } 
         this.movBut[ran].status = ButtonControl.TRANFER.MOVE;
+        
     },
 
     checkMovingButton: function(){
@@ -125,6 +147,10 @@ var ButtonControl = cc.Node.extend({
     closeTo: function( frame , move ){
         var f = frame.getPosition();
         var m = move.getPosition();
+        if( move.xpos == this.cross.xpos && Math.abs( f.y - this.cross.getPosition().y ) <= 100 ){
+            this.crossRandom();
+            return false;
+        }
         if ( ( Math.abs(f.y - m.y ) <= 100 ) ){
             this.restart( move );
             move.status = ButtonControl.TRANFER.STOP;
@@ -171,7 +197,7 @@ var ButtonControl = cc.Node.extend({
     updateVelocity: function( ve ){
         if( ve < 1 ) this.velocity = 1;
         else{
-            if(ve < this.velocity) this.velocity -= ve * 0.9;
+            if(ve < this.velocity) this.velocity -= ve * 0.8;
             else this.velocity = ve + 5 ;
         } 
     },
@@ -182,7 +208,7 @@ var ButtonControl = cc.Node.extend({
 
     velocitySchedule: function(){
         this.schedule( function(){
-            this.velocity += 5;
+            this.velocity += 3;
         },3 );
     }
 

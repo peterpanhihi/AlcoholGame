@@ -30,6 +30,7 @@ var g_resources = [
     {src: 'res/images/bgAlcohol.jpg'},
     {src: 'res/images/drunk.png'},
     {src: 'res/images/undrunk.png'},
+    {src: 'res/images/cross.png'},
  
     //plist
  
