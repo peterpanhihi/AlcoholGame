@@ -19,7 +19,7 @@ var WaterTube = cc.Node.extend({
     increase: function(){
     	if( this.rate < 1 && this.state == WaterTube.DIR.BUTTOM ){
     		this.rate += 0.03;
-    		this.inner.setScaleY(this.rate);
+    		this.inner.setScaleY( this.rate );
     	}else {
             this.state = WaterTube.DIR.TOP;
             if( this.countInnerUponBottle < 8 )
@@ -31,7 +31,7 @@ var WaterTube = cc.Node.extend({
     decrease: function(){
     	if( this.rate >= 0.05 && this.state == WaterTube.DIR.BUTTOM ){
     		this.rate -= 0.05;
-    		this.inner.setScaleY(this.rate);
+    		this.inner.setScaleY( this.rate );
     	}
         else {
             this.countInnerUponBottle--;
@@ -41,7 +41,7 @@ var WaterTube = cc.Node.extend({
 
     resetRate: function(){
         this.rate = 0;
-        this.inner.setScaleY(this.rate);
+        this.inner.setScaleY( this.rate );
     },
 
     setImageInner: function( count ){

@@ -2,9 +2,9 @@ var BonusBut = cc.Sprite.extend({
 	ctor: function(){
 		this._super();
 		this.status = false;
-		this.bonus = cc.Sprite.create('res/images/fried_chicken_default.png');
-        this.bonus.setPosition(new cc.Point(250,150));
-        this.addChild(this.bonus);
+		this.bonus = cc.Sprite.create( 'res/images/fried_chicken_default.png' );
+        this.bonus.setPosition( new cc.Point( 250 , 150 ) );
+        this.addChild( this.bonus );
         this.correctPress = 0;
 	},
 

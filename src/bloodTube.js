@@ -40,7 +40,7 @@ var BloodTube = cc.Node.extend({
     rateValueSchedule: function(){
         this.schedule(function(){
             this.rateValue += 0.005;
-        },15);
+        } , 12 );
     }
 
 });

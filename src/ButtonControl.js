@@ -78,7 +78,7 @@ var ButtonControl = cc.Node.extend({
             this.randomButton();
         }
         this.setDelay();
-        this.scheduleOnce(function(){
+        this.scheduleOnce( function(){
             this.buttonSchedule();
         }, delay );
     },
@@ -100,7 +100,7 @@ var ButtonControl = cc.Node.extend({
         var ran = Math.floor( Math.random() * 5 );
         if( ran == 4 ){
             this.crossRandom();
-            delay+=0.1;
+            delay += 0.05;
             return;
         } 
         this.movBut[ran].status = ButtonControl.TRANFER.MOVE;
@@ -151,7 +151,7 @@ var ButtonControl = cc.Node.extend({
             this.crossRandom();
             return false;
         }
-        if ( ( Math.abs(f.y - m.y ) <= 100 ) ){
+        if ( ( Math.abs( f.y - m.y ) <= 100 ) ){
             this.restart( move );
             move.status = ButtonControl.TRANFER.STOP;
             cc.AudioEngine.getInstance().playEffect( 'effects/human_swallow_gulp.mp3' );
@@ -197,7 +197,7 @@ var ButtonControl = cc.Node.extend({
     updateVelocity: function( ve ){
         if( ve < 1 ) this.velocity = 1;
         else{
-            if(ve < this.velocity) this.velocity -= ve * 0.8;
+            if( ve < this.velocity ) this.velocity -= ve * 0.8;
             else this.velocity = ve + 5 ;
         } 
     },
@@ -209,24 +209,24 @@ var ButtonControl = cc.Node.extend({
     velocitySchedule: function(){
         this.schedule( function(){
             this.velocity += 3;
-        },3 );
+        } , 3 );
     }
 
 });
 
 ButtonControl.TRANFER = {
-    MOVE: 0,
-    STOP: 1
+    MOVE : 0,
+    STOP : 1
 };
 
 ButtonControl.XPOSITION = {
-    ONE: 390,
-    TWO: 500,
-    THREE: 610,
-    FOUR: 720
+    ONE : 390,
+    TWO : 500,
+    THREE : 610,
+    FOUR : 720
 };
 
 ButtonControl.LEAVE = {
-    TOP: 1,
-    BUTTOM: 2
+    TOP : 1,
+    BUTTOM : 2
 };

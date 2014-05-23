@@ -6,11 +6,11 @@ var Loader = cc.Layer.extend({
 
 	init: function(){
 		var bg = cc.Sprite.create( "res/images/bgAlcohol.jpg" );
-        bg.setPosition(new cc.Point(400,300) );
-        this.addChild(bg);
+        bg.setPosition( new cc.Point( 400 , 300 ) );
+        this.addChild( bg );
 
-        this.setTouchEnabled(true);
-        this.setTouchMode(1);
+        this.setTouchEnabled( true );
+        this.setTouchMode( 1 );
         this.playSound();
 
         this.texts = [ "ARE" , "YOU" , "READY" ];
@@ -18,7 +18,7 @@ var Loader = cc.Layer.extend({
 
         this.lable = cc.LabelTTF.create( this.texts[0] , 'Arial' , 100 );
         this.lable.setPosition( new cc.Point( 400 , 220 ) );
-        this.addChild(this.lable);
+        this.addChild( this.lable );
         this.textSchedule();
 
 	},
@@ -33,17 +33,17 @@ var Loader = cc.Layer.extend({
 	},
 
 	textSchedule: function(){
-        this.schedule(function(){
+        this.schedule( function(){
         	if( count >= 3 ) {
-        		this.scheduleOnce(function(){
+        		this.scheduleOnce( function(){
         			count = 0;
-        		}, 2);
+        		} , 2 );
 
         	}else{
         		this.lable.setString( this.texts[count] );
            		count++;
         	}
-        }, 0.5 );
+        } , 0.5 );
         
     }
 

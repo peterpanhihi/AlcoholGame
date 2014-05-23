@@ -4,16 +4,16 @@ var GameLayer = cc.LayerColor.extend({
         this.playMusic();
 
         var bg = cc.Sprite.create( "res/images/bg.jpg" );
-        bg.setPosition(new cc.Point(400,400) );
-        this.addChild(bg);
+        bg.setPosition( new cc.Point( 400,400 ) );
+        this.addChild( bg );
 
         var udCartoon = cc.Sprite.create( "res/images/undrunk.png");
-        udCartoon.setPosition( new cc.Point( 30 , 530 ));
-        this.addChild(udCartoon);
+        udCartoon.setPosition( new cc.Point( 30 , 530 ) );
+        this.addChild( udCartoon );
 
         var dCartoon = cc.Sprite.create( "res/images/drunk.png" );
-        dCartoon.setPosition( new cc.Point( 630 , 530 ));
-        this.addChild(dCartoon);
+        dCartoon.setPosition( new cc.Point( 630 , 530 ) );
+        this.addChild( dCartoon );
 
 		this.waterTube = new WaterTube();
 		this.addChild( this.waterTube );
@@ -63,19 +63,19 @@ var GameLayer = cc.LayerColor.extend({
     onKeyDown: function( e ) {
     	switch( e ) {
     		case cc.KEY.up:
-                this.checkCloseTo("up");
+                this.checkCloseTo( "up" );
                 this.but.setUpImageBlink();
     		    break;
     		case cc.KEY.down:
-                this.checkCloseTo("down");
+                this.checkCloseTo( "down" );
                 this.but.setDownImageBlink();
     	       	break;
     		case cc.KEY.left:
-                this.checkCloseTo("left");
+                this.checkCloseTo( "left" );
                 this.but.setLeftImageBlink();
         		break;
     		case cc.KEY.right:
-                this.checkCloseTo("right");
+                this.checkCloseTo( "right" );
                 this.but.setRightImageBlink();
            		break;
     		case cc.KEY.w:
@@ -149,13 +149,13 @@ var GameLayer = cc.LayerColor.extend({
     bloodSchedule: function(){
     	this.schedule( function(){
     		this.blood.increase();
-    	},1 );
+    	} , 1 );
     },
 
     waterSchedule: function(){
     	this.schedule( function(){
     		this.waterTube.increase();
-    	},2 );
+    	} , 2 );
     },
 
 	update: function( dt ){
@@ -166,9 +166,9 @@ var GameLayer = cc.LayerColor.extend({
 
     endGame: function(){
         setTimeout(function(){
-            if(confirm("GAME OVER !! \nYour score : " + score + "\n Try again")){
+            if( confirm( "GAME OVER !! \nYour score : " + score + "\n Try again" ) ){
             location.reload();
-        }},1000);
+        }} , 1000 );
     },
 
     playMusic: function(){
@@ -186,14 +186,14 @@ var StartScene = cc.Scene.extend({
 });
 
 GameLayer.DIR = {
-	LEFT: 1,
-	RIGHT: 2,
-	UP: 3,
-	DOWN: 4,
-	STILL:0
+	LEFT : 1,
+	RIGHT : 2,
+	UP : 3,
+	DOWN : 4,
+	STILL : 0
 };
 
 GameLayer.PRESS = {
-	UP:0,
-	DOWN:1
+	UP : 0,
+	DOWN : 1
 };
