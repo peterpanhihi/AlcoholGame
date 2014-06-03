@@ -100,7 +100,7 @@ var ButtonControl = cc.Node.extend({
         var ran = Math.floor( Math.random() * 5 );
         if( ran == 4 ){
             this.crossRandom();
-            delay += 0.05;
+            delay = 1.5;
             return;
         } 
         this.movBut[ran].status = ButtonControl.TRANFER.MOVE;

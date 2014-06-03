@@ -1,6 +1,7 @@
 var g_resources = [
 	//image
     {src: 'res/images/Down_Button.png' },
+    {src: 'res/images/Down_Button.png' },
     {src: 'res/images/Down_default.png' },
     {src: 'res/images/Down_frame.png' },
     {src: 'res/images/Left_Button.png' },
