@@ -161,11 +161,11 @@ var ButtonControl = cc.Node.extend({
 
     restart:function( move ){
         var leave = Math.floor( Math.random() * 2 ) + 1;
-        if( leave == 1 ){
+        if( leave == ButtonControl.LEAVE.TOP ){
             move.startFrom = ButtonControl.LEAVE.TOP;
             move.setPosition( new cc.Point( move.xpos , 700 ) );
         }
-        else if( leave == 2 ){
+        else if( leave == ButtonControl.LEAVE.BUTTOM ){
             move.startFrom = ButtonControl.LEAVE.BUTTOM;
             move.setPosition( new cc.Point( move.xpos , -100 ) );
         }
